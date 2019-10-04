@@ -14,10 +14,15 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 dofile(minetest.get_modpath("rotation") .. "/rotation.lua")
-minetest.register_chatcommand("rotation_set_h", {
+
+minetest.register_privilege("rotation", {
+	description="use rotation commands",
+})
+
+minetest.register_chatcommand("set_h", {
 	params = "<degrees>",
 	description = "Set the horizontal rotation of the player",
-	privs = {},
+	privs = {rotation=true},
 	func = function(name, param)
 		local degrees = string.match(param, "^%s*(%-?%d+)%s*$")
 		if degrees ~= nil then
@@ -27,10 +32,10 @@ minetest.register_chatcommand("rotation_set_h", {
 		end
 	end
 })
-minetest.register_chatcommand("rotation_set_v", {
+minetest.register_chatcommand("set_v", {
 	params = "<degrees>",
 	description = "Set the vertical rotation of the player",
-	privs = {},
+	privs = {rotation=true},
 	func = function(name, param)
 		local degrees = string.match(param, "^%s*(%-?%d+)%s*$")
 		if degrees ~= nil then
@@ -40,10 +45,10 @@ minetest.register_chatcommand("rotation_set_v", {
 		end
 	end
 })
-minetest.register_chatcommand("rotation_set", {
+minetest.register_chatcommand("set_r", {
 	params = "<degrees>",
 	description = "Set the rotation of the player",
-	privs = {},
+	privs = {rotation=true},
 	func = function(name, param)
 		local degrees = string.match(param, "^%s*(%-?%d+)%s*$")
 		if degrees ~= nil then
@@ -56,7 +61,7 @@ minetest.register_chatcommand("rotation_set", {
 minetest.register_chatcommand("rotation_version", {
 	params = "",
 	description = "Show the rotation version",
-	privs = {},
+	privs = {rotation=true},
 	func = function(name, param)
 		local result = string.match(param, "^%s*$")
 		if result ~= nil then
